@@ -35,3 +35,5 @@ class BasePageLocators():
     SELECTOR_BASKET_EMPTY = (By.CSS_SELECTOR, "#content_inner > p")
     SELECTOR_NOT_ITEM_IN_BASKET = (By.CSS_SELECTOR, "#basket_formset")
     USER_ICON = (By.CSS_SELECTOR, ".icon-user")
+    SELECTOR_ADD_TO_BASKET = (By.CSS_SELECTOR, "#add_to_basket_form > button")
+    SELECTOR_CHECK_AVAILABILITY_IN_BASKET = (By.CSS_SELECTOR, "#content_inner > div.basket-title.hidden-xs > div > h2")
