@@ -19,3 +19,11 @@ class ProductPage(BasePage):
                                                                                                                   '.')
         assert float(price_product.replace(' £', '')) == float(basket_price_product.replace(' £',
                                                                                             '')), "The product price and the amount in the shopping cart do not match."
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SELECTOR_SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def should_element_is_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.SELECTOR_SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
