@@ -1,5 +1,6 @@
 from .base_page import BasePage
 from .locators import LoginPageLocators
+import faker
 
 
 class LoginPage(BasePage):
@@ -7,6 +8,7 @@ class LoginPage(BasePage):
         self.should_be_login_url()
         self.should_be_login_form()
         self.should_be_register_form()
+        self.register_new_user(email=any, password=any)
 
     def should_be_login_url(self):
         # реализуйте проверку на корректный url адрес
@@ -20,3 +22,16 @@ class LoginPage(BasePage):
     def should_be_register_form(self):
         # реализуйте проверку, что есть форма регистрации на странице
         assert self.is_element_present(*LoginPageLocators.REGISTRATION_FORM), "Did not find REGISTRATION FORM"
+
+    def register_new_user(self, email, password):
+        f = faker.Faker()
+        email = f.email()
+        password = f.password()
+        login = self.browser.find_element(*LoginPageLocators.LOGIN_USER_SELECTOR)
+        login.send_keys(email)
+        passwords = self.browser.find_element(*LoginPageLocators.PASSWORD_USER_SELECTOR)
+        passwords.send_keys(password)
+        passwords2 = self.browser.find_element(*LoginPageLocators.PASSWORD_USER_SELECTOR2)
+        passwords2.send_keys(password)
+        button = self.browser.find_element(*LoginPageLocators.BUTTON_REGISTRATION_SELECTOR)
+        button.click()
