@@ -18,4 +18,3 @@ class BasketPage(BasePage):
         login_page = BasketPage(self.browser, self.browser.current_url)
         login_page.should_product_in_basket()
 
-
