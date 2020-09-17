@@ -43,7 +43,6 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     page.should_cant_see_product_in_basket()
 
 
-@pytest.mark.need_review
 class TestUserAddBasketFromProductPage(object):
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser):
@@ -53,7 +52,6 @@ class TestUserAddBasketFromProductPage(object):
         self.page.register_new_user(email=any, password=any)
         self.page.should_be_authorized_user()
 
-    @pytest.mark.need_review
     def test_user_cant_see_success_message(self, browser):
         link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
         page = ProductPage(browser, link)
