@@ -14,11 +14,10 @@ class ProductPage(BasePage):
 
     def check_price_product_in_price_basket(self):
         price_product = self.browser.find_element(*ProductPageLocators.SELECTOR_PRICE).text.replace(',', '.')
-        print(price_product)
         basket_price_product = self.browser.find_element(*ProductPageLocators.SELECTOR_PRICE_BASKET).text.replace(',',
                                                                                                                   '.')
-        assert float(price_product.replace(' £', '')) == float(basket_price_product.replace(' £',
-                                                                                            '')), "The product price and the amount in the shopping cart do not match."
+        assert float(price_product.replace('£', '')) == float(basket_price_product.replace('£', '')), \
+            "The product price and the amount in the shopping cart do not match."
 
     def should_not_be_success_message(self):
         assert self.is_not_element_present(*ProductPageLocators.SELECTOR_SUCCESS_MESSAGE), \
