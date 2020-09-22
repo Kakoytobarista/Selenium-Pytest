@@ -1,4 +1,3 @@
-from selenium.common.exceptions import NoAlertPresentException
 from pages.product_page import ProductPage
 from pages .basket_page import BasketPage
 from pages .login_page import LoginPage
@@ -25,7 +24,7 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     page = ProductPage(browser, link)
     page.open()
     page.add_to_basket()
-    page.should_not_be_success_message()
+    page.should_be_success_message()
 
 
 @pytest.mark.need_review
@@ -38,6 +37,16 @@ def test_guest_cant_see_success_message(browser):
 
 @pytest.mark.need_review
 def test_message_disappeared_after_adding_product_to_basket(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.add_to_basket()
+    page.open()
+    page.should_element_is_disappeared()
+
+
+@pytest.mark.need_review
+def test_message_not_disappeared_after_adding_product_to_basket(browser):
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
     page = ProductPage(browser, link)
     page.open()
@@ -91,7 +100,7 @@ def test_guest_see_added_product_in_basket_opened_from_product_page(browser):
     time.sleep(3)
 
 
-class TestUserAddBasketFromProductPage():
+class TestUserAddBasketFromProductPage(object):
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser):
         link = "http://selenium1py.pythonanywhere.com/en-gb/accounts/login/."
@@ -114,5 +123,3 @@ class TestUserAddBasketFromProductPage():
         page.open()
         page.add_to_basket()
         page.check_name_product_in_string_basket()
-
-
